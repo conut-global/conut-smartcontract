@@ -11,7 +11,7 @@ module.exports = function(deployer) {
   .then(() => {
     return deployer.deploy(BEP20FixedSupply)
     .then(() => {
-      return deployer.deploy(SimpleExchangeNFT, NFTDigital.address, BEP20FixedSupply.address);
+      return deployer.deploy(SimpleExchangeNFT, NFTDigital.address, '0xd6b4a89e6c2c9a615a809927b66ba23f92335186', BEP20FixedSupply.address);
     });
   })
 };

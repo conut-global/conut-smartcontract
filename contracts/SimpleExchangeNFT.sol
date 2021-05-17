@@ -3,47 +3,80 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/security/PullPayment.sol";
-import "./BEP20FixedSupply.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-contract SimpleExchangeNFT is Ownable, PullPayment {
-    event SellToken ( uint256 indexed tokenId, uint indexed price );
-    event BuyToken ( address buyer, uint256 indexed tokenId, uint indexed price );
-    // Mapping from token ID to price
-    mapping (uint256 => uint256) public tokenPrices; 
+contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
+    enum CirculatingToken { BNB, BMP, BUSD }
 
-    ERC721 public nftAddress;
-    BEP20FixedSupply public bep20Token;
-
-    constructor (address _nftAddress, address _bep20Address) {
-        require(_nftAddress != address(0), "SimpleExchangeNFT: nftAddress is the zero address");
-        require(_bep20Address != address(0), "SimpleExchangeNFT: bep20Address is the zero address");
-        nftAddress = ERC721(_nftAddress);
-        bep20Token = BEP20FixedSupply(_bep20Address);
+    struct NftPrice {
+        uint256 price;
+        CirculatingToken token;
     }
 
-    function sellToken(uint256 tokenId, uint price) public returns (uint256) {
+    event SellToken ( uint256 indexed tokenId, NftPrice indexed nftPrice );
+    event BuyToken ( uint256 indexed tokenId, NftPrice indexed nftPrice );
+
+    // Mapping from NFT ID to NFT price
+    mapping (uint256 => NftPrice) public nftSellPrices; 
+
+    ERC721 public nftAddress;
+    IERC20 public busdAddress;
+    IERC20 public bmpAddress;
+
+    constructor (address _nftAddress, address _busdAddress, address _bmpAddress) {
+        require(_nftAddress != address(0), "SimpleExchangeNFT: nftAddress is the zero address");
+        require(_busdAddress != address(0), "SimpleExchangeNFT: busdAddress is the zero address");
+        require(_bmpAddress != address(0), "SimpleExchangeNFT: bmpAddress is the zero address");
+
+        nftAddress = ERC721(_nftAddress);
+        busdAddress = ERC20(_busdAddress);
+        bmpAddress = ERC20(_bmpAddress);
+    }
+
+    function sellToken(uint256 tokenId, NftPrice memory nftPrice) public returns (uint256) {
         require(msg.sender != address(0) && msg.sender != address(this), "SimpleExchangeNFT: sender is the zero address");
         require(nftAddress.ownerOf(tokenId) == msg.sender, "SimpleExchangeNFT: sender is not owner ");
-        tokenPrices[tokenId] = price;
+        require(nftPrice.price > 0, "SimpleExchangeNFT: NFT price must then ZERO");
 
-        emit SellToken(tokenId, price);
+        NftPrice memory nftPriceExisted = nftSellPrices[tokenId];
+        require(nftPriceExisted.price == 0, "SimpleExchangeNFT: NFT is selling");
+
+        nftSellPrices[tokenId] = nftPrice;
+
+        emit SellToken(tokenId, nftPrice);
 
         return tokenId;
     }
 
-    function buyToken(uint256 tokenId) public {
+    function buyToken(uint256 tokenId) payable public nonReentrant {
         require(msg.sender != address(0) && msg.sender != address(this), "SimpleExchangeNFT: sender is the zero address");
-        require(bep20Token.balanceOf(msg.sender) >= tokenPrices[tokenId], "SimpleExchangeNFT: amount is less than price");
+
+        NftPrice memory nftPrice = nftSellPrices[tokenId];
+        require(nftPrice.price > 0, "SimpleExchangeNFT: NFT not for sell");
 
         address addressSeller = nftAddress.ownerOf(tokenId);
 
-        bep20Token.transferFrom(msg.sender, addressSeller, tokenPrices[tokenId]);
+        if (nftPrice.token == CirculatingToken.BMP) {
+            require(bmpAddress.balanceOf(msg.sender) >= nftPrice.price, "SimpleExchangeNFT: BMP amount is less than price");
+
+            bmpAddress.transferFrom(msg.sender, addressSeller, nftPrice.price);
+        } else if (nftPrice.token == CirculatingToken.BUSD) {
+            require(busdAddress.balanceOf(msg.sender) >= nftPrice.price, "SimpleExchangeNFT: BUSD amount is less than price");
+
+            busdAddress.transferFrom(msg.sender, addressSeller, nftPrice.price);
+        } else if (nftPrice.token == CirculatingToken.BNB) {
+            require(msg.value >= nftPrice.price, "SimpleExchangeNFT: BNB amount is less than price");
+
+            payable(addressSeller).transfer(msg.value);
+        } else {
+            require(false, "SimpleExchangeNFT: token is not support");
+        }
 
         nftAddress.safeTransferFrom(addressSeller, msg.sender, tokenId);
-        delete tokenPrices[tokenId];
+        delete nftSellPrices[tokenId];
 
-        emit BuyToken(msg.sender, tokenId, tokenPrices[tokenId]);
+        emit BuyToken(tokenId, nftPrice);
     }
 }

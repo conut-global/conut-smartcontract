@@ -1,16 +1,39 @@
 # Contracts on Testnet:
 
-- SimpleExchangeNFT https://testnet.bscscan.com/address/0xC6e6e3656BD8b37fEa95C1b48de013df89580c83
+- SimpleExchangeNFT https://testnet.bscscan.com/address/0xE406259201CB871bC14Cf152026cD6b9A05C9AcF
 
-- NFTDigital https://testnet.bscscan.com/address/0xe8255E2765CbB734bA2edCa8578F55eA2AEA499A
+- NFTDigital https://testnet.bscscan.com/address/0x78cdf8145c1f1736E75AEb3d283ad91bC2449C4f
 
-- BEP20FixSupply https://testnet.bscscan.com/address/0xcE9e8fD5fbB9C13620AAcf050b01Cd38d0650Ff0
+- BEP20FixSupply https://testnet.bscscan.com/address/0x6D79C350891D3CB2Ea2E65F43E5C864410a93EaA
+
+- BUSD https://testnet.bscscan.com/address/0xd6b4a89e6c2c9a615a809927b66ba23f92335186
 
 # How to create NFT use contract NFTDigital
 
 Call the method create
 
 Full API https://docs.openzeppelin.com/contracts/4.x/api/token/erc20
+
+# The smart contract is support BUY / SELL buy currency BNB and BEP20 tokens BMP, BUSD
+
+```
+enum CirculatingToken { BNB, BMP, BUSD }
+
+struct NftPrice {
+    uint256 price;
+    CirculatingToken token;
+}
+
+event SellToken ( uint256 indexed tokenId, NftPrice indexed nftPrice );
+event BuyToken ( uint256 indexed tokenId, NftPrice indexed nftPrice );
+
+function sellToken(uint256 tokenId, NftPrice memory nftPrice)
+
+EX:
+
+sellToken(1, { price: 10, token: 0 })
+
+```
 
 # How to sell NFT use contract SimpleExchange
 

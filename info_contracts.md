@@ -1,12 +1,39 @@
-Replacing 'NFTDigital'
+1_initial_migration.js
+======================
+
+   Replacing 'Migrations'
    ----------------------
-   > transaction hash:    0x1d589d7ee2041314728dd584099bb84e85fab5e064e4164e1e3282017242358e
-   > Blocks: 1            Seconds: 4
-   > contract address:    0xEBb0AFd87Fe53c05BD5CEf76E4D16c88b54795a3
-   > block number:        7917899
-   > block timestamp:     1618243869
+   > transaction hash:    0x40515d13e597875044fdf0da7131e0b805f82c7f6ddde1ca346ef59c7f785643
+   > Blocks: 3            Seconds: 8
+   > contract address:    0xCf49b6E975aF834e4C52212df4D2eBECD7517fd7
+   > block number:        8868933
+   > block timestamp:     1621099100
    > account:             0xC7636168C8967120fF5D383Cb5E2e7996C3765C9
-   > balance:             12.12938958
+   > balance:             6.12765597999999999
+   > gas used:            246904 (0x3c478)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00493808 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00493808 ETH
+
+
+2_deploy.js
+===========
+
+   Replacing 'NFTDigital'
+   ----------------------
+   > transaction hash:    0xf00b5ba20214f477285b57a718979797c6fb96bf80baadeb50edac33010cff32
+   > Blocks: 1            Seconds: 10
+   > contract address:    0x78cdf8145c1f1736E75AEb3d283ad91bC2449C4f
+   > block number:        8868941
+   > block timestamp:     1621099124
+   > account:             0xC7636168C8967120fF5D383Cb5E2e7996C3765C9
+   > balance:             6.07703409999999999
    > gas used:            2488581 (0x25f905)
    > gas price:           20 gwei
    > value sent:          0 ETH
@@ -15,41 +42,50 @@ Replacing 'NFTDigital'
 
    Replacing 'BEP20FixedSupply'
    ----------------------------
-
-   Deploying 'SimpleExchangeNFT'
-   -----------------------------
-   > transaction hash:    0x6f5d648484d234876293598e715fc53b5fc583ad1fa0b4cd73e906417ead0581
-   ⠼ Blocks: 0            Seconds: 0   > transaction hash:    0x13e2eb53e693d2595390f474ece954aa6692bda590e4513af795a86808eabbf2
-   > Blocks: 2            Seconds: 4
-   > contract address:    0xA4b655bcd9AB300E6f222A521a5DB3E25477BFa0
-   > block number:        7917902
-   > block timestamp:     1618243878
+   > transaction hash:    0xa1cd15cb91379a652938081500f6cb9ca115b0cee9a594501275e41321cc4b93
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x6D79C350891D3CB2Ea2E65F43E5C864410a93EaA
+   > block number:        8868944
+   > block timestamp:     1621099133
    > account:             0xC7636168C8967120fF5D383Cb5E2e7996C3765C9
-   > balance:             12.10445944
+   > balance:             6.05210395999999999
    > gas used:            1246507 (0x13052b)
    > gas price:           20 gwei
    > value sent:          0 ETH
    > total cost:          0.02493014 ETH
 
 
-   > Blocks: 3            Seconds: 8
-   > contract address:    0x41102BE979736193c31Caa4366E904BC6bbD63bA
-   > block number:        7917903
-   > block timestamp:     1618243881
+   Replacing 'SimpleExchangeNFT'
+   -----------------------------
+   > transaction hash:    0x98b538f2791c2f8f3dc963f2322f623b8469a71329ef1983c981e3a9e2556b27
+   > Blocks: 1            Seconds: 4
+   > contract address:    0xE406259201CB871bC14Cf152026cD6b9A05C9AcF
+   > block number:        8868947
+   > block timestamp:     1621099142
    > account:             0xC7636168C8967120fF5D383Cb5E2e7996C3765C9
-   > balance:             12.06729608
-   > gas used:            1858168 (0x1c5a78)
+   > balance:             6.01436961999999999
+   > gas used:            1886717 (0x1cc9fd)
    > gas price:           20 gwei
    > value sent:          0 ETH
-   > total cost:          0.03716336 ETH
+   > total cost:          0.03773434 ETH
 
-   ⠴ Blocks: 0            Seconds: 0   > Saving migration to chain.
+
+   > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.11186512 ETH
+   > Total cost:           0.1124361 ETH
 
 
 Summary
 =======
 > Total deployments:   4
-> Final cost:          0.1168032 ETH
+> Final cost:          0.11737418 ETH
+
+
+- Fetching solc version list from solc-bin. Attempt #1
+- Blocks: 0            Seconds: 0
+- Saving migration to chain.
+- Blocks: 0            Seconds: 0
+- Blocks: 0            Seconds: 0
+- Blocks: 0            Seconds: 0
+- Saving migration to chain.

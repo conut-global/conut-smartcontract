@@ -1,10 +1,10 @@
 # Contracts on Testnet:
 
-- SimpleExchangeNFT https://testnet.bscscan.com/address/0xE406259201CB871bC14Cf152026cD6b9A05C9AcF
+- SimpleExchangeNFT https://testnet.bscscan.com/address/0x4545B71473cc10052B216caEC6fDa2AEe12E2fAc
 
-- NFTDigital https://testnet.bscscan.com/address/0x78cdf8145c1f1736E75AEb3d283ad91bC2449C4f
+- NFTDigital https://testnet.bscscan.com/address/0xDFF2380e79F3F977aC13A697649787f21335a84D
 
-- BEP20FixSupply https://testnet.bscscan.com/address/0x6D79C350891D3CB2Ea2E65F43E5C864410a93EaA
+- BMP https://testnet.bscscan.com/address/0x1A898AB065441505d6f0C8C3a1CE32Ec0a206514
 
 - BUSD https://testnet.bscscan.com/address/0xd6b4a89e6c2c9a615a809927b66ba23f92335186
 
@@ -17,7 +17,7 @@ Full API https://docs.openzeppelin.com/contracts/4.x/api/token/erc20
 # The smart contract is support BUY / SELL buy currency BNB and BEP20 tokens BMP, BUSD
 
 ```
-enum CirculatingToken { BNB, BMP, BUSD }
+enum CirculatingToken { BNB, BMP, BUSD } // Values: 0, 1, 2
 
 struct NftPrice {
     uint256 price;

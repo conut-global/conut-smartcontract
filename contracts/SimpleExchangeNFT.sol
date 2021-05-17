@@ -35,7 +35,7 @@ contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
         bmpAddress = ERC20(_bmpAddress);
     }
 
-    function sellToken(uint256 tokenId, NftPrice memory nftPrice) public returns (uint256) {
+    function sellToken(uint256 tokenId, NftPrice memory nftPrice) public {
         require(msg.sender != address(0) && msg.sender != address(this), "SimpleExchangeNFT: sender is the zero address");
         require(nftAddress.ownerOf(tokenId) == msg.sender, "SimpleExchangeNFT: sender is not owner ");
         require(nftPrice.price > 0, "SimpleExchangeNFT: NFT price must then ZERO");
@@ -46,8 +46,6 @@ contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
         nftSellPrices[tokenId] = nftPrice;
 
         emit SellToken(tokenId, nftPrice);
-
-        return tokenId;
     }
 
     function buyToken(uint256 tokenId) payable public nonReentrant {

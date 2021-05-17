@@ -25,11 +25,12 @@ bep20.transfer(accounts[0], 1000)
 
 bep20.increaseAllowance(simpleExchange.address, 10000000)
 busd.increaseAllowance('0xc405Bb679a5E7070585219f429f502bA8601f5F4', 1E20)
-nft.approve(simpleExchange.address, 1, { from: accounts[1] })
+nft.approve(simpleExchange.address, 3, { from: accounts[1] })
 
-simpleExchange.sellToken(1, { price: 10, token: 0 }, { from: accounts[1] })
+simpleExchange.sellToken(1, { price: 5000000000, token: 0 }, { from: accounts[1] })
 simpleExchange.sellToken(1, { price: 100, token: 1 }, { from: accounts[1] })
 simpleExchange.sellToken(1, { price: 1000, token: 2 }, { from: accounts[1] })
+
 
 price = await simpleExchange.nftSellPrices(1)
 price.toNumber()
@@ -43,7 +44,7 @@ web3.eth.accounts.create();
 simpleExchange.buyToken(1, { from: accounts[0] })
 simpleExchange.buyToken(2, { from: accounts[0] })
 
-simpleExchange.buyToken(1, { from: accounts[0], value: 10 })
+simpleExchange.buyToken(1, { from: accounts[0], value: 5000000000 })
 
 b = await simpleExchange.tokenPrices(2);
 
@@ -51,7 +52,10 @@ await web3.eth.getBalance(accounts[0])
 await web3.eth.getBalance(accounts[1])
 await web3.eth.getBalance(accounts[2])
 
-await web3.eth.getTransaction('0xaef318a564144538e840db1289ef16460d148b3c59c650a7e04204dec2e5b83e')
+t = await web3.eth.getTransactionReceipt('0xed4ed50e06ee420f801bf6b07b6662b8d4a96979beb433c9a66b512c5953c701')
+
+
+events = await simpleExchange.getPastEvents('allEvents', { fromBlock: 8927000, toBlock: 8927195 } )
 
 
 

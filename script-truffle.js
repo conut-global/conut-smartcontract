@@ -16,7 +16,9 @@ allowance.toNumber()
 
 bep20.transferFrom(accounts[0], '0x7b39204675eD85a6574e5E2Ce56F0C5dcB4043E2', 10000);
 
-bep20.transfer('0x177E42b7A1a124DaC17B61E1f9A30e3121067eF4', 100000)
+bep20.transfer('0xaaba1aAa4330105072c1032C6220E06F259d0b48', 100000)
+busd.transfer('0xaaba1aAa4330105072c1032C6220E06F259d0b48', '10000000000000000000000')
+
 
 balance = await bep20.balanceOf(accounts[0])
 balance.toNumber()

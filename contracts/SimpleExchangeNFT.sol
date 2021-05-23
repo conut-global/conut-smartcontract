@@ -15,8 +15,8 @@ contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
         CirculatingToken token;
     }
 
-    event SellToken ( uint256 indexed tokenId, NftPrice indexed nftPrice );
-    event BuyToken ( uint256 indexed tokenId, NftPrice indexed nftPrice );
+    event SellToken ( uint256 indexed tokenId, uint256 indexed price, CirculatingToken indexed token );
+    event BuyToken ( uint256 indexed tokenId, uint256 indexed price, CirculatingToken indexed token );
 
     // Mapping from NFT ID to NFT price
     mapping (uint256 => NftPrice) public nftSellPrices; 
@@ -45,7 +45,7 @@ contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
 
         nftSellPrices[tokenId] = nftPrice;
 
-        emit SellToken(tokenId, nftPrice);
+        emit SellToken(tokenId, nftPrice.price, nftPrice.token);
     }
 
     function buyToken(uint256 tokenId) payable public nonReentrant {
@@ -75,6 +75,6 @@ contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
         nftAddress.safeTransferFrom(addressSeller, msg.sender, tokenId);
         delete nftSellPrices[tokenId];
 
-        emit BuyToken(tokenId, nftPrice);
+        emit BuyToken(tokenId, nftPrice.price, nftPrice.token);
     }
 }

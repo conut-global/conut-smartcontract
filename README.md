@@ -1,10 +1,10 @@
 # Contracts on Testnet:
 
-- SimpleExchangeNFT https://testnet.bscscan.com/address/0x4545B71473cc10052B216caEC6fDa2AEe12E2fAc
+- SimpleExchangeNFT https://testnet.bscscan.com/address/0xd87c4Fe446717224d317eC02FEaf5955Dd6980e4
 
-- NFTDigital https://testnet.bscscan.com/address/0xDFF2380e79F3F977aC13A697649787f21335a84D
+- NFTDigital https://testnet.bscscan.com/address/0xa042E690a4D68bd9D291d26231421392A6CB9F11
 
-- BMP https://testnet.bscscan.com/address/0x1A898AB065441505d6f0C8C3a1CE32Ec0a206514
+- BMP https://testnet.bscscan.com/address/0x30fD2A74f4EB4DA1419fA7FBEad5c14A1FA0FeF3
 
 - BUSD https://testnet.bscscan.com/address/0xd6b4a89e6c2c9a615a809927b66ba23f92335186
 
@@ -24,10 +24,11 @@ struct NftPrice {
     CirculatingToken token;
 }
 
-event SellToken ( uint256 indexed tokenId, NftPrice indexed nftPrice );
-event BuyToken ( uint256 indexed tokenId, NftPrice indexed nftPrice );
+event SellToken ( uint256 indexed tokenId, uint256 indexed price, CirculatingToken indexed token );
+event BuyToken ( uint256 indexed tokenId, uint256 indexed price, CirculatingToken indexed token );
 
-function sellToken(uint256 tokenId, NftPrice memory nftPrice)
+function sellToken(uint256 tokenId, NftPrice memory nftPrice);
+function buyToken(uint256 tokenId);
 
 EX:
 

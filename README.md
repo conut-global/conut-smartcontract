@@ -17,7 +17,7 @@ Call the method create
 
 Full API https://docs.openzeppelin.com/contracts/4.x/api/token/erc20
 
-# The smart contract is support BUY / SELL buy currency BNB and BEP20 tokens BMP, BUSD
+# The smart contract is support BUY / SELL buy currency BNB and BEP20 tokens BMP, BUSD, CONT
 
 - The BNB decimals on BSC is 18
 - The BMP decimals on BSC is 2
@@ -25,7 +25,7 @@ Full API https://docs.openzeppelin.com/contracts/4.x/api/token/erc20
 - The CONT decimals on BSC is 18
 
 ```
-enum CirculatingToken { BNB, BMP, BUSD } // Values: 0, 1, 2
+enum CirculatingToken { BNB, BMP, BUSD, CONT } // Values: 0, 1, 2
 
 struct NftPrice {
     uint256 price;

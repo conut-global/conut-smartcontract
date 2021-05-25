@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
-    enum CirculatingToken { BNB, BMP, BUSD }
+    enum CirculatingToken { BNB, BMP, BUSD, CONT }
 
     struct NftPrice {
         uint256 price;
@@ -24,8 +24,9 @@ contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
     ERC721 public nftAddress;
     IERC20 public busdAddress;
     IERC20 public bmpAddress;
+    IERC20 public contAddress;
 
-    constructor (address _nftAddress, address _busdAddress, address _bmpAddress) {
+    constructor (address _nftAddress, address _busdAddress, address _bmpAddress, address _contAddress) {
         require(_nftAddress != address(0), "SimpleExchangeNFT: nftAddress is the zero address");
         require(_busdAddress != address(0), "SimpleExchangeNFT: busdAddress is the zero address");
         require(_bmpAddress != address(0), "SimpleExchangeNFT: bmpAddress is the zero address");
@@ -33,6 +34,7 @@ contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
         nftAddress = ERC721(_nftAddress);
         busdAddress = ERC20(_busdAddress);
         bmpAddress = ERC20(_bmpAddress);
+        contAddress = ERC20(_contAddress);
     }
 
     function sellToken(uint256 tokenId, NftPrice memory nftPrice) public {
@@ -64,6 +66,10 @@ contract SimpleExchangeNFT is Ownable, ReentrancyGuard {
             require(busdAddress.balanceOf(msg.sender) >= nftPrice.price, "SimpleExchangeNFT: BUSD amount is less than price");
 
             busdAddress.transferFrom(msg.sender, addressSeller, nftPrice.price);
+        } else if (nftPrice.token == CirculatingToken.CONT) {
+            require(contAddress.balanceOf(msg.sender) >= nftPrice.price, "SimpleExchangeNFT: CONT amount is less than price");
+
+            contAddress.transferFrom(msg.sender, addressSeller, nftPrice.price);
         } else if (nftPrice.token == CirculatingToken.BNB) {
             require(msg.value >= nftPrice.price, "SimpleExchangeNFT: BNB amount is less than price");
 

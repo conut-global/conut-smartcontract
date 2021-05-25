@@ -15,6 +15,11 @@ const ABI = [
         "internalType": "address",
         "name": "_bmpAddress",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_contAddress",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -30,22 +35,16 @@ const ABI = [
         "type": "uint256"
       },
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "price",
-            "type": "uint256"
-          },
-          {
-            "internalType": "enum SimpleExchangeNFT.CirculatingToken",
-            "name": "token",
-            "type": "uint8"
-          }
-        ],
         "indexed": true,
-        "internalType": "struct SimpleExchangeNFT.NftPrice",
-        "name": "nftPrice",
-        "type": "tuple"
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum SimpleExchangeNFT.CirculatingToken",
+        "name": "token",
+        "type": "uint8"
       }
     ],
     "name": "BuyToken",
@@ -80,22 +79,16 @@ const ABI = [
         "type": "uint256"
       },
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "price",
-            "type": "uint256"
-          },
-          {
-            "internalType": "enum SimpleExchangeNFT.CirculatingToken",
-            "name": "token",
-            "type": "uint8"
-          }
-        ],
         "indexed": true,
-        "internalType": "struct SimpleExchangeNFT.NftPrice",
-        "name": "nftPrice",
-        "type": "tuple"
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum SimpleExchangeNFT.CirculatingToken",
+        "name": "token",
+        "type": "uint8"
       }
     ],
     "name": "SellToken",
@@ -112,7 +105,8 @@ const ABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -125,7 +119,22 @@ const ABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "contAddress",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -138,7 +147,8 @@ const ABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -162,7 +172,8 @@ const ABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -175,7 +186,8 @@ const ABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -238,6 +250,7 @@ const ABI = [
     "name": "buyToken",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   }
 ]

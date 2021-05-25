@@ -7,6 +7,7 @@
 - BMP https://testnet.bscscan.com/address/0x30fD2A74f4EB4DA1419fA7FBEad5c14A1FA0FeF3
 
 - BUSD https://testnet.bscscan.com/address/0xd6b4a89e6c2c9a615a809927b66ba23f92335186
+- CONT: https://testnet.bscscan.com/token/0x2009975970c8c8b8ed05f3cdb65571c7d1f6acfa
 
 # How to create NFT use contract NFTDigital
 
